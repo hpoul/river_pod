@@ -260,6 +260,7 @@ abstract class ProviderElementBase<State> implements Ref<State>, Node {
   List<void Function()>? _onCancelListeners;
   List<void Function()>? _onAddListeners;
   List<void Function()>? _onRemoveListeners;
+  List<void Function()>? _onRefreshListeners;
   List<void Function(State?, State)>? _onChangeSelfListeners;
   List<void Function(Object, StackTrace)>? _onErrorSelfListeners;
 
@@ -971,6 +972,17 @@ The provider ${_debugCurrentlyBuildingElement!.origin} modified $origin while bu
   void onResume(void Function() cb) {
     _onResumeListeners ??= [];
     _onResumeListeners!.add(cb);
+  }
+
+  @override
+  void onRefresh(void Function() cb) {
+    _onRefreshListeners ??= [];
+    _onRefreshListeners!.add(cb);
+  }
+
+  @protected
+  void triggerOnRefresh() {
+    _onRefreshListeners?.forEach(_runGuarded);
   }
 
   @override
