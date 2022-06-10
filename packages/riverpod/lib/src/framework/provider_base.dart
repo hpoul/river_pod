@@ -947,6 +947,7 @@ The provider ${_debugCurrentlyBuildingElement!.origin} modified $origin while bu
     _onRemoveListeners = null;
     _onChangeSelfListeners = null;
     _onErrorSelfListeners = null;
+    _onRefreshListeners = null;
     _didCancelOnce = false;
   }
 
